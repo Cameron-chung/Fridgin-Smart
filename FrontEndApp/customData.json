@@ -1,0 +1,17 @@
+{
+    "food1": {
+        "id": "1",
+        "ingredients": "Tikka",
+        "health": "Amazing",
+        "cuisineType": "Indian",
+        "mealType": "Dinner"
+    },
+
+    "food2": {
+        "id":"2",
+        "ingredients": "Bulgogi",
+        "health": "Fast Food",
+        "cuisineType": "Korean",
+        "mealType": "Lunch"
+    }
+}
