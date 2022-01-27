@@ -4,10 +4,8 @@ from picamera import PiCamera
 import time
 import cv2
 # initialize the camera and grab a reference to the raw camera capture
-camera = Picamera()
 cap = cv2.VideoCapture(0)
 camera.resolution = (640, 480)
-camera.framerate = 60
 camera.vflip = True
 cap.set(3, 640)
 cap.set(4, 480)
