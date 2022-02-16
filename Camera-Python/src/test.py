@@ -1,6 +1,7 @@
 # import the necessary packages
 from picamera.array import PiRGBArray
 from picamera import PiCamera
+from pyzbar.pyzbar import decode
 import time
 import cv2
 # initialize the camera and grab a reference to the raw camera capture
@@ -40,7 +41,8 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 	# grab the raw NumPy array representing the image, then initialize the timestamp
 	# and occupied/unoccupied text
 	image = frame.array
-	BarcodeReader(image)
+	print(image)
+	#BarcodeReader(image)
 	# show the frame
 	cv2.imshow("Frame", image)
 	key = cv2.waitKey(1) & 0xFF
