@@ -31,6 +31,9 @@ response = requests.get(api_source + "?app_id=" + app_id + "&app_key=" + app_key
 # print(response)
 # print(response.status_code)
 
-item  = json.loads(response.text)
 
-print("The item entered is " + item["hints"][0]["food"]['label'])
+if response.status_code == 404:
+    print("No item with the UPC has been found. Would you like to enter this item in manually?")
+else: 
+    item  = json.loads(response.text)
+    print("The item entered is " + item["hints"][0]["food"]['label'])
