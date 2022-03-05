@@ -13,6 +13,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import FoodItem from "../Components/FoodItem";
+import axios from "axios";
+import { v4 as uuidv4 } from 'uuid';
 
 const Item = ({ title }) => (
   <View>
@@ -34,11 +36,22 @@ const DATA = [
     title: "juice Item",
   },
 ];
+axios.get(`http://localhost:5000`).then(response =>{
+  DATA.push(response.data);
+  console.log(DATA);
+});
 export const Fridge = () => {
   const [food, setFood] = useState();
 
   const handleAddFood = () => {
-    //keyboard.dimiss(); //on mobile device, can dismiss keyboard once enter is hit
+
+    axios.post('http://localhost:5000/write', {"id": uuidv4(),"title": food})
+    .then((response) => {
+      console.log(response);
+    }).catch((err) => {
+      console.log(err);
+    });
+   //keyboard.dimiss(); //on mobile device, can dismiss keyboard once enter is hit
     setFoodItems([...foodItems, food]); //food is appended to foodItems[]arry
     setFood(null); //textinput area empties
   };
@@ -53,9 +66,9 @@ export const Fridge = () => {
         foodItemsCopy.splice(index,1);
         setFoodItems(foodItemsCopy)
     }
-  const renderItem = ({ item }) => <Item title={item.title} />;
+   const renderItem = ({ item }) => <Item title={item.title} />;
 
-  return (
+   return (
     <Page title="Fridge">
       Contents of your Fridge:
       <FlatList
@@ -71,7 +84,7 @@ export const Fridge = () => {
       {/* <FoodItem text={"chicken"} />
       <FoodItem text={"tomato"} />
       <FoodItem text={"brocolli"} />
-      <FoodItem text={"orange"} /> */} 
+      <FoodItem text={"orange"} /> */}
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.keyboardwrapper}
