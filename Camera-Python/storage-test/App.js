@@ -1,29 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { WebView } from 'react-native-webview';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
 
-  const [food, setFood] = useState();
+  [food, setFood] = useState();
 
-  const save = async () => {
+  save = async () => {
     try {
       await AsyncStorage.setItem("MyFood", food);
 
     } catch (err){
-      alert(err);
+        alert(err);
     }
   }
 
   const load = async () =>{
     try {
-      await AsyncStorage.setItem("MyFood", food);
+      let food = await AsyncStorage.getItem("MyFood");
 
+      if (food !== null){
+        setFood(food);
+      }
     } catch (err){
-      alert(err);
+        alert(err);
     }
   }
+
+  const remove = async () =>{
+    try {
+      await AsyncStorage.removeItem("MyFood");
+
+      if (food !== null){
+        setFood(food);
+      }
+    } catch (err){
+        alert(err);
+    } finally {
+        setFood("");
+    }
+  }
+
+  useEffect(() => {
+    load();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -38,11 +59,11 @@ export default function App() {
 
       <TextInput style={styles.input} onChangeText={(text) => setFood(text)} />
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => save()}>
         <Text style={{color: "white" }}>Save my food!</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => remove()}>
         <Text style={{color: "white" }}>Remove my food!</Text>
       </TouchableOpacity>
 
