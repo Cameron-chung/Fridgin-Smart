@@ -7,7 +7,7 @@ export default function App() {
 
   const [food, setFood] = React.useState("");
 
-  save = async () => {
+  const save = async () => {
     try {
       await AsyncStorage.setItem("MyFood", food);
 
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: "#575DD9",
-    alighSelf: "stretch",
+    alignSelf: "stretch",
     margin: 32,
     height: 64,
     borderRadius: 6,
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#575DD9",
-    alighItems: "center",
+    alignItems: "center",
     justifyContent: "center",
     alignSelf: "stretch",
     paddingVertical: 12,
