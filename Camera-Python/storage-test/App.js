@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { WebView } from 'react-native-webview';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
 
-  [food, setFood] = useState();
+  const [food, setFood] = React.useState("");
 
   save = async () => {
     try {
@@ -42,14 +42,14 @@ export default function App() {
     }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     load();
   }, []);
 
   return (
     <View style={styles.container}>
       <Image
-        source={equire(".assets/welcome.png")}
+        source={require("./assets/welcome.png")}
         style={{width: "100%", height: 200, marginTop: 64}}
         resizeMode="contain"
       />
