@@ -105,3 +105,26 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   }
 });
+
+const wrapSetList = async (item_name) => {
+  return new Promise((resolve, reject) => {
+    resolve(
+      setList((prev) => {
+        return [...prev, { item_name }];
+      })
+    );
+  });
+};
+
+const deleteItem = (title) => {
+  var array = [...newlist]; // make a separate copy of the array
+  let newArray = [];
+  //console.log(array);
+    for(let i =0; i<array.length; i++){
+      if(array[i].item_name !== title){
+        newArray.push(array[i]);
+      }
+    }
+    //console.log(newArray);
+    setNewList(newArray);
+};
